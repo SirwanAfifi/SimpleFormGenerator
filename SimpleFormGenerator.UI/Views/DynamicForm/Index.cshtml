@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SimpleFormGenerator.DomainClasses.Form>
+
+@{
+    ViewBag.Title = "Dynamic Form";
+}
+
+@Html.ActionLink("ایجاد فرم", "CreateForm")
+
+<table class="table table-striped">
+    <tr>
+        <td>کد</td>
+        <td>عنوان فرم</td>
+        <td>مربوط به صفحه</td>
+        <td>عملیات</td>
+    </tr>
+    
+    @foreach (var form in Model)
+    {
+        <tr>
+            <td>@form.Id</td>
+            <td>@form.Title</td>
+            <td>@form.Page</td>
+            <td>
+                @Html.ActionLink("تعریف فیلد", "CreateField") |
+                @Html.ActionLink("مشاهده فرم", "ShowForm", new { id = form.Id })
+        </td>
+        </tr>
+    }
+</table>

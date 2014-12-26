@@ -1,0 +1,51 @@
+﻿@using SimpleFormGenerator.DomainClasses
+@model IEnumerable<SimpleFormGenerator.DomainClasses.Field>
+
+@{
+    ViewBag.Title = "ShowForm";
+}
+
+@Html.ValidationSummary(true)
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                for (int i = 0; i < Model.Count(); i++)
+                {
+                    if (Model.ElementAt(i).FieldType == FieldType.Text)
+                    {
+                        <text>
+                            <input type="hidden" name="[@i].FieldType" value="@Model.ElementAt(i).FieldType" />
+                            <input type="hidden" name="[@i].Id" value="@Model.ElementAt(i).Id" /> 
+                            <input type="hidden" name="[@i].FormId" value="@Model.ElementAt(i).FormId" /> 
+                            <div class="form-group">
+                                <label>@Model.ElementAt(i).TitleFa</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="[@i].TitleEn" data-val="true" data-val-required="عنوان را وارد نمائید" id="[@i].TitleEn" value="" />
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="[@i].TitleEn" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+            
+           
+            
+           
+
+
+                        </text>
+                    }
+                }
+                <div class="form-group" data-formId ="@ViewBag.FormId">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="ارسال فرم" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </div>
+        <div>
+            @Html.ActionLink("بازگشت", "Index")
+        </div>
+    </div>
+</div>
